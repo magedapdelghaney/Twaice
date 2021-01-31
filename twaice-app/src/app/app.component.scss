@@ -1,0 +1,54 @@
+
+
+.content {
+  display: flex;
+  flex-direction: column;
+  font-size: 18px;
+  text-transform: uppercase;
+}
+.container-app
+{
+  background-color: #EDF2F7;
+}
+.content {
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin: 30px;
+
+}
+main {
+  flex: 4;
+  order: 2;
+  min-height: 80vh;
+  border: 1px solid gray;
+}
+.left-sidebar {
+  order: 1;
+  flex: 1;
+}
+
+ .sidenav {
+   width: 250px;
+   background: white;
+   overflow-x: hidden;
+   padding: 0 0;
+   margin: 0;
+ }
+ .sidenav li {
+   padding: 20px;
+   text-decoration: none;
+   font-size: 16px;
+   color: black;
+   display: block;
+   cursor: pointer;
+ }
+ .sidenav li:hover {
+   color: #064579;
+   background-color: #CBD5E0;
+ }
+ .main-header, .sidenav li:first-child
+ {
+  background-color: #CBD5E0;
+  padding: 20px;
+  color: rgb(46, 46, 46);
+ }

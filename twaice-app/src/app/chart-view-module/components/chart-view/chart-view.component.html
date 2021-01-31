@@ -1,0 +1,21 @@
+<section class="chart-content">
+  <div class="main-header">
+    <div>About</div>
+    <div class="chart-selector">
+
+      <mat-form-field appearance="fill">
+        <mat-label>Cell</mat-label>
+        <mat-select name="cell"  (selectionChange)='selectCellChart($event.value)'>
+          <mat-option *ngFor="let item of cells" value="item.tid" [value]="item.id">
+            {{item.id}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="chart-container">
+    <app-chart *ngIf="this.CurrentCell" [GraphData]='this.CurrentCell.Sensor'></app-chart>
+
+  </div>
+</section>
