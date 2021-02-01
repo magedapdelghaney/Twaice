@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ChartViewServiceService } from '../../services/chart-view-service.service';
 import { Battery } from '../../models/battery.model';
-import { CloseScrollStrategy } from '@angular/cdk/overlay';
-
 
 @Component({
   selector: 'app-chart-view',
@@ -13,23 +11,55 @@ export class ChartViewComponent implements OnInit {
 
   batteryData: Battery[];
   cells: Battery[];
-  CurrentCell: Battery;
+  cellData: Battery;
+  allCellsData: Battery = {
+    Sensor: {
+      timestamps: [],
+      values: []
+    }, title: '', id: ''
+  };
+  selectAllMode = false;
   constructor(private chartService: ChartViewServiceService) { }
 
   ngOnInit(): void {
     this.getAllBatteriesData();
-    this.chartService.batteryList.subscribe(cells => {
-      this.cells = cells;
+    this.chartService.batteryList.subscribe(response => {
+      this.cells = response;
     });
   }
 
-  getAllBatteriesData() {
+  /**
+   * fetching all batteries data to list the cells on selection dropdown
+   */
+  getAllBatteriesData(): void {
     this.chartService.fetchBatteryData();
   }
 
-  selectCellChart(cellId) {
-    this.CurrentCell = this.chartService.getCellDataById(cellId);
+  /**
+   * get battery sensors data by selected battery Id
+   * @param cellId selected battery Id
+   */
+  selectCellChart(cellId): void {
+    let currentCell: Battery = null;
+    if (cellId !== 'SelectAll') {
+      this.selectAllMode = false;
+      currentCell = this.chartService.getCellDataById(cellId);
+    } else {
+      this.getAllCellsDataChart();
+    }
+    this.cellData = { ...currentCell };
 
+  }
+
+  /**
+   * concatenate all cell data to show in one graph
+   */
+  getAllCellsDataChart(): void {
+    this.cells.forEach(cell => {
+      this.allCellsData.Sensor.timestamps.push(...cell.Sensor.timestamps);
+      this.allCellsData.Sensor.values.push(...cell.Sensor.values);
+    });
+    this.selectAllMode = true;
   }
 
 }

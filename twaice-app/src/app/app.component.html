@@ -1,20 +1,19 @@
+<div class="container-app">
+  <app-header></app-header>
+  <div class="content">
 
+    <aside class="left-sidebar">
+      <ul class="sidenav">
+        <li>Navigation</li>
+        <li routerLink="/about">about</li>
+        <li routerLink="/chart">chart</li>
+      </ul>
+    </aside>
+    <main class="main-content">
+      <router-outlet></router-outlet>
+    </main>
 
-    <div class="container-app">
-      <app-header></app-header>
-      <div class="content">
+  </div>
+  <app-footer></app-footer>
 
-        <aside class="left-sidebar">
-          <ul class="sidenav">
-            <li>Navigation</li>
-           <li routerLink="/about">about</li>
-           <li routerLink="/chart">chart</li>
-          </ul>
-        </aside>
-        <main>
-        <router-outlet></router-outlet></main>
-
-      </div>
-      <app-footer></app-footer>
-
-    </div>
+</div>

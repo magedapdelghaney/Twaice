@@ -2,15 +2,13 @@ import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/cor
 import { Battery } from '../../models/battery.model';
 
 @Component({
-  selector: 'app-chart',
-  templateUrl: './chart.component.html',
-  styleUrls: ['./chart.component.scss'],
+  selector: 'app-combined-chart',
+  templateUrl: './combined-chart.component.html',
+  styleUrls: ['./combined-chart.component.scss']
 })
-export class ChartComponent implements OnInit, OnChanges {
+export class CombinedChartComponent implements OnInit, OnChanges {
+
   @Input() GraphData: Battery;
-  /**
-   * define default graph object, for updating graph data by change selection
-   */
   public graph = {
     data: [
       {
@@ -28,13 +26,12 @@ export class ChartComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     this.graph.data = [
       {
-        x: this.GraphData.Sensor.timestamps, y: this.GraphData.Sensor.values, type: 'scatter',
-        mode: 'lines+points', marker: { color: 'red' }
+        x: this.GraphData.Sensor.timestamps, y: this.GraphData.Sensor.values,
+        type: 'scatter', mode: 'lines+points', marker: { color: 'red' }
       },
     ];
 
-    this.graph.layout.title = this.GraphData.title + ' ' + this.GraphData.id;
+    this.graph.layout.title = 'All Batteries';
 
   }
-
 }

@@ -1,13 +1,13 @@
 <section class="chart-content">
   <div class="main-header">
-    <div>About</div>
+    <h1>Chart</h1>
     <div class="chart-selector">
 
-      <mat-form-field appearance="fill">
-        <mat-label>Cell</mat-label>
-        <mat-select name="cell"  (selectionChange)='selectCellChart($event.value)'>
-          <mat-option *ngFor="let item of cells" value="item.tid" [value]="item.id">
-            {{item.id}}
+      <mat-form-field >
+        <mat-select [placeholder]='"select"' name="cell" (selectionChange)='selectCellChart($event.value)'>
+          <mat-option value="SelectAll">Display all</mat-option>
+          <mat-option *ngFor="let item of cells" [value]="item.id">
+            Cell {{item.id}}
           </mat-option>
         </mat-select>
       </mat-form-field>
@@ -15,7 +15,10 @@
   </div>
 
   <div class="chart-container">
-    <app-chart *ngIf="this.CurrentCell" [GraphData]='this.CurrentCell.Sensor'></app-chart>
-
+    <div *ngIf="!this.cellData" class="chart-empty-message">
+      <p>please Select Cell to draw the chart</p>
+    </div>
+    <app-chart *ngIf="this.cellData && !selectAllMode" [GraphData]='this.cellData'></app-chart>
+    <app-combined-chart *ngIf="selectAllMode" [GraphData]='this.allCellsData'></app-combined-chart>
   </div>
 </section>
